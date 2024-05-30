@@ -1,0 +1,28 @@
+2. Working with method overloading
+- Question: Compare addDigitalVideoDisc(DigitalVideoDisc [] dvdList or method addDigitalVideoDisc which allows to pass an arbitrary number of arguments for dvd.
+Answer:
++ Using an Array Parameter: public void addDigitalVideoDiscs(DigitalVideoDisc[] dvdList)
+	Pros: - Clearly specifies that an array of 'DigitalVideoDisc' objects is expected.
+		- Provides a straightforward way to pass a pre-defined array of DVDs.
+	Cons: - Requires explicitly creating an array before calling the method if you're not already working with an array.
++ Using a Variable Arguments Parameter: public void addDigitalVideoDiscs(DigitalVideoDisc... dvdList)
+	Pros: - Allows to pass an arbitrary number of 'DigitalVideoDisc' arguments, even without explicitly creating an array.
+		- More flexible and convenient for calling the method with multiple DVDs.
+	Cons: - May be less explicit about the expected parameter type when reading the method signature.
+In conclusion, in this case i prefer using the array parameter approach since i already have a pre-defined array of DVDs that i want to add to the cart
+
+
+3. Passing Parameter 
+- Question: Is JAVA a Pass by Value or a Pass by Reference programming language?
+Answer: It is a Pass by Value programming language
+
+- Question: After the call of swap(jungleDVD, cinderellaDVD) why does the title of these two objects still remain?
+Answer: 
+	+ The swap method in this code takes two object references as parameters and swaps their values using a temporary variable. However, the swap operation does not change the values of the original object references passed as arguments. Instead, it only swaps the references themselves, which are local variables within the swap method. 
+	+ Therefore, the values of jungleDVD and cinderellaDVD remain unchanged because the swap only affected the local variables o1 and o2 inside the swap method.
+
+- Question: After the call of changeTitle(jungleDVD, cinderellaDVD.getTitle()) why is the title of the JungleDVD changed?
+Answer:
+	+ In the changeTitle method, a new DigitalVideoDisc object is created with the old title, but this new object is not returned or assigned to any variable. It passes jungleDVD as the first argument, which means that the dvd parameter inside the method is referencing the same object as jungleDVD. The getTitle method of cinderellaDVD is called to obtain the title argument for changeTitle.
+	+ The setTitle method is called on the dvd parameter, which changes the title of the DigitalVideoDisc object that jungleDVD and dvd are both referencing.
+	+ The next line of the changeTitle method creates a new DigitalVideoDisc object with the old title, but this object is not returned or assigned to any variable. Therefore, it has no effect on the title of the DigitalVideoDisc object referenced by jungleDVD.

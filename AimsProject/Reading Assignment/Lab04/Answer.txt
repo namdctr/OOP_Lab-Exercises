@@ -1,0 +1,107 @@
+9. To determine which classes are aggregates of other classes and check if their constructors initialize their parts, we need to examine the relationships between the classes and analyze their constructors. Based on the provided code, here are the classes and their relationships:
+
+Class: Media
+
+This is a parent class that represents a generic media item.
+No other classes directly aggregate it.
+It has a constructor that initializes its attributes.
+Class: DigitalVideoDisc
+
+This class extends the Media class.
+It aggregates the Media class as its parent.
+It has a constructor that initializes its own attributes and invokes the constructor of the Media class using the super() keyword.
+Class: Book
+
+This class extends the Media class.
+It aggregates the Media class as its parent.
+It has a constructor that initializes its own attributes and invokes the constructor of the Media class using the super() keyword.
+Class: CompactDisc
+
+This class extends the Disc class.
+It aggregates the Disc class as its parent.
+It has a constructor that initializes its own attributes and invokes the constructor of the Disc class using the super() keyword.
+Class: Disc
+
+This class extends the Media class.
+It aggregates the Media class as its parent.
+It has a constructor that initializes its own attributes and invokes the constructor of the Media class using the super() keyword.
+Class: Track
+
+This class represents a track in a CompactDisc.
+It does not aggregate any other classes.
+It has a constructor that initializes its own attributes.
+Based on the above analysis, here are the constructors for the parent and child classes:
+
+Media class:
+
+Constructor: public Media(String title)
+DigitalVideoDisc class:
+
+Constructor: public DigitalVideoDisc(String title, String category, float cost, int length)
+Book class:
+
+Constructor: public Book(String title, String category, float cost, String author)
+CompactDisc class:
+
+Constructor: public CompactDisc(String title, String category, float cost, String director)
+Disc class:
+
+Constructor: public Disc(String title, String category, float cost, int length)
+Track class:
+
+Constructor: public Track(String title, int length)
+It's important to note that if any redundant setter methods exist for the attributes that are already initialized in the constructors, you can remove those redundant setter methods to avoid unnecessary duplication and ensure proper encapsulation
+
+10. Unique item in a list
+ 
+Question: When overriding the equals() method of the Object class, you will have to cast the Object parameter obj to the type of Object that you are dealing with. For example, in the Media class, you must cast the Object obj to a Media, and then check the equality of the two objects’ attributes as the above requirements (i.e. title for Media; title and length for Track). If the passing object is not an instance of Media, what happens?
+
+--> Answer: The equals() method should return 'false'
+
+12. Sort media in the cart
+
+Question: Alternatively, to compare items in the cart, instead of using Comparator, we can use the Comparable interface and override the compareTo()method. You can refer to the Java docs to see the information of this interface.
+Suppose we are taking this Comparable interface approach.
+
+- What class should implement the Comparable interface?
+--> Answer: The class that represents the items in the cart should implement the Comparable interface. In this case, that class would be the 'Media' class or any subclass of it.
+
+- In those classes, how should you implement the compareTo()method be to reflect the ordering that we want?
+--> Answer: To implement the compareTo() method in the Media class or its subclasses in a way that reflects the desired ordering, we need to define the comparison logic based on the criteria we want to use for sorting the items in the cart.
+For example, this is an implementation in the Media class for sorting items by title:
+
+@Override
+public int compareTo(Media other) {
+    int titleComparison = this.getTitle().compareTo(other.getTitle());
+    if (titleComparison != 0) {
+        return titleComparison;
+    }
+    // If titles are the same, compare by cost
+    return Float.compare(this.getCost(), other.getCost());
+}
+
+
+- Can we have two ordering rules of the item (by title then cost and by cost then title) if we use this Comparable interface approach?
+--> Answer: No. The 'Comparable' interface only allows to define one ordering rule.
+
+- Suppose the DVDs has a different ordering rule from the other media types, that is by title, then decreasing length, then cost. How would you modify your code to allow this? 
+--> Answer: To accommodate a different ordering rule for DVDs, you can follow a similar approach as before but override the compareTo() method specifically in the DigitalVideoDisc class to reflect the desired ordering. Additionally, you can create a separate Comparator for DVDs that implements the desired ordering rule.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
